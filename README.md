@@ -1,9 +1,13 @@
 # "skull, abstract, butterfly" art project 
 
-  <br/>   <br/>   <br/>   <br/>   <br/> 
+  <br/>   <br/>  
   
 ### Each work is stored in the ART folder.  
 
+<br/>  
+
+
+### PREVIEW
 https://user-images.githubusercontent.com/86279699/202438080-dba02bbb-b102-45a5-82f5-f2466d9fb0d6.mp4
 
 
