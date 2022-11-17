@@ -1,5 +1,4 @@
-# skull_abstract_butterfly
-"skull, abstract, butterfly" art project 
+# "skull, abstract, butterfly" art project 
 
   <br/>   <br/>   <br/>   <br/>   <br/> 
 
