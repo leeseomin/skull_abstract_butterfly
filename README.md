@@ -12,6 +12,6 @@
  https://github.com/leeseomin 
   <br/> 
  https://twitter.com/Techne_0_1
- <br/><br/>
+ <br/>
  https://www.youtube.com/@leeseomin
-  <br/><br/>
+  <br/>
