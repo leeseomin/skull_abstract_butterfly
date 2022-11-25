@@ -9,6 +9,9 @@
 ### VIDEO ON Youtube
 https://youtu.be/uAfQubgTR8Q
 
+### Youtube Shorts
+https://youtube.com/shorts/_7h4gUiftm8
+
 ### PREVIEW
 
 
