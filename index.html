@@ -186,7 +186,6 @@
     function render(ids) {
       grid.innerHTML = ids.map((id) => {
         const name = `skull_abstract_butterfly_${id}`;
-        const thumb = `thumb/${name}.webp`;
         const full = `ART2500/${name}.webp`;
         const label = id.toUpperCase();
         return `
@@ -198,7 +197,7 @@
             data-label="work ${label}"
             aria-label="Open full image work ${label}"
           >
-            <img loading="lazy" decoding="async" src="${thumb}" alt="work ${label}" />
+            <img loading="lazy" decoding="async" src="${full}" alt="work ${label}" />
           </a>
         `;
       }).join("");
