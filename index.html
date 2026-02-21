@@ -171,7 +171,6 @@
     const workCount = document.getElementById("workCount");
     const shuffleBtn = document.getElementById("shuffleBtn");
 
-    workCount.textContent = String(workIds.length);
     render(workIds);
 
     shuffleBtn.addEventListener("click", () => {
@@ -184,23 +183,41 @@
     });
 
     function render(ids) {
-      grid.innerHTML = ids.map((id) => {
+      grid.innerHTML = "";
+      for (const id of ids) {
         const name = `skull_abstract_butterfly_${id}`;
         const full = `ART2500/${name}.webp`;
         const label = id.toUpperCase();
-        return `
-          <a
-            class="work"
-            href="${full}"
-            target="_blank"
-            rel="noopener"
-            data-label="work ${label}"
-            aria-label="Open full image work ${label}"
-          >
-            <img loading="lazy" decoding="async" src="${full}" alt="work ${label}" />
-          </a>
-        `;
-      }).join("");
+
+        const card = document.createElement("a");
+        card.className = "work";
+        card.href = full;
+        card.target = "_blank";
+        card.rel = "noopener";
+        card.dataset.label = `work ${label}`;
+        card.setAttribute("aria-label", `Open full image work ${label}`);
+
+        const img = document.createElement("img");
+        img.loading = "lazy";
+        img.decoding = "async";
+        img.alt = `work ${label}`;
+
+        // Remove broken items so missing files never show as black cards.
+        img.addEventListener("error", () => {
+          card.remove();
+          updateWorkCount();
+        });
+
+        img.src = full;
+        card.appendChild(img);
+        grid.appendChild(card);
+      }
+
+      updateWorkCount();
+    }
+
+    function updateWorkCount() {
+      workCount.textContent = String(grid.querySelectorAll(".work").length);
     }
   </script>
 </body>
