@@ -65,7 +65,7 @@
       gap: 8px 14px;
       align-items: center;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 17px;
       letter-spacing: 0.04em;
       text-transform: uppercase;
     }
@@ -150,7 +150,6 @@
       <div class="meta">
         <span>Artist: <strong>Lee Seomin</strong></span>
         <span>Works: <strong id="workCount">0</strong></span>
-        <span>Click image to open full PNG</span>
         <div class="actions">
           <button id="shuffleBtn" type="button">Shuffle</button>
         </div>
@@ -160,11 +159,12 @@
   </div>
 
   <script>
+    // This list should reflect what's actually hosted in `ART2500/`.
     const workIds = [
-      "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+      "1", "2", "4", "7", "8", "9", "10",
       "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-      "21", "22", "23", "24", "25", "26", "27", "28", "28r", "29",
-      "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40"
+      "21", "22", "23", "24", "25", "26", "27", "28r", "29", "31",
+      "36", "37", "40"
     ];
 
     const grid = document.getElementById("grid");
@@ -184,8 +184,10 @@
 
     function render(ids) {
       grid.innerHTML = "";
-      for (const id of ids) {
+      for (let index = 0; index < ids.length; index += 1) {
+        const id = ids[index];
         const name = `skull_abstract_butterfly_${id}`;
+        const thumb = `thumb/${name}.webp`;
         const full = `ART2500/${name}.webp`;
         const label = id.toUpperCase();
 
@@ -198,17 +200,25 @@
         card.setAttribute("aria-label", `Open full image work ${label}`);
 
         const img = document.createElement("img");
-        img.loading = "lazy";
+        // Use thumbnails for the grid to keep the initial load fast.
+        img.loading = "eager";
         img.decoding = "async";
         img.alt = `work ${label}`;
+        img.width = 250;
+        img.height = 250;
+        img.fetchPriority = index < 12 ? "high" : "auto";
 
-        // Remove broken items so missing files never show as black cards.
+        // Prefer thumbs; fall back to full if a thumbnail is missing.
         img.addEventListener("error", () => {
+          if (img.src.endsWith(thumb)) {
+            img.src = full;
+            return;
+          }
           card.remove();
           updateWorkCount();
         });
 
-        img.src = full;
+        img.src = thumb;
         card.appendChild(img);
         grid.appendChild(card);
       }
